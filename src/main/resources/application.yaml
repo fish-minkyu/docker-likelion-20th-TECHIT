@@ -1,9 +1,3 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/todos
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: todo
-    password: password
-  jpa:
-    hibernate:
-      ddl-auto: create
+  profiles:
+    active: docker

@@ -1,0 +1,27 @@
+# YAML의 형식으로 Multi Container App이
+# 실행해야 하는 Container를 정리한 파일
+
+# 실행해야되는 Container 들
+services:
+  # Service 이름: 실행해야 하는 Container를 부를 이름
+  app:
+    image: todo-boot
+    container_name: todo-compose
+    # 재시작 규칙
+    restart: on-failure
+    # -p
+    ports:
+      - 8080:8080
+    # 다른 서비스가 먼저 실행이 되어야 하는지 (의존성)
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8.0
+    container_name: todo-mysql-compose
+    restart: always
+    # 환경변수들
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=todo
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=todos
