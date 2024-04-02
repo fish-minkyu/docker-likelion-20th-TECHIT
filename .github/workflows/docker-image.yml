@@ -28,3 +28,12 @@ jobs:
         env:
           TAG: ${{ steps.image-tag.outputs.TAG }}
         run: docker push "${{ secrets.DOCKERHUB_USERNAME }}/todo-boot:$TAG"
+      # latest push 하기
+      - name: Tag Image as latest
+        env:
+          TAG: ${{ steps.image-tag.outputs.TAG }}
+        run: |
+          docker tag "${{ secrets.DOCKERHUB_USERNAME }}/todo-boot:$TAG" \
+          "${{ secrets.DOCKERHUB_USERNAME }}/todo-boot:latest"
+      - name: Push latest
+        run: docker push "${{ secrets.DOCKERHUB_USERNAME }}/todo-boot:latest"
