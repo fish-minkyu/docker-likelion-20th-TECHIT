@@ -1,0 +1,22 @@
+version: 0.0
+os: linux
+
+# 배포된 압축파일을 서버 어디에 저장할 것인지
+files:
+  - source: /
+    destination: /home/ubuntu/app
+    overwrite: yes
+
+# 해당하는 파일의 Linux 소유자
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+
+# 순차적으로 실행할 스크립트를 지정하는 부분
+hooks:
+  ApplicationStart:
+    - location: scripts/application_start.sh
+      timeout: 60
+      runas: ubuntu
