@@ -17,6 +17,6 @@ permissions:
 # 순차적으로 실행할 스크립트를 지정하는 부분
 hooks:
   ApplicationStart:
-    - location: scripts/application_start.sh
+    - location: scripts/seamless_start.sh
       timeout: 60
       runas: ubuntu
