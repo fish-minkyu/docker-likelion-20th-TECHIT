@@ -26,6 +26,7 @@ EOF
 
 
 # 여기부터 새로운 Stage가 시작된다.
+# 여기 FROM은 최적화 실행을 위해 JRE만 불러온다.
 FROM eclipse-temurin:17-jre
 
 WORKDIR /app
