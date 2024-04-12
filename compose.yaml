@@ -1,3 +1,4 @@
+# Docker Compose가 인식하는 yaml 파일
 # YAML의 형식으로 Multi Container App이
 # 실행해야 하는 Container를 정리한 파일
 
