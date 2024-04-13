@@ -1,3 +1,4 @@
+# Delivery 까지만 진행한다.
 name: Docker Image Delivery
 
 on:
