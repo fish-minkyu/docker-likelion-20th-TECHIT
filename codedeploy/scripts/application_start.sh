@@ -11,6 +11,6 @@ if [ $running -ge 1 ]; then
 fi
 
 # 새 이미지를 가져오고
-docker pull edujeeho/todo-boot:latest
+docker pull minkyueo/todo-boot:latest
 # 실행한다.
-docker run -d --name todo-cd -p 8080:8080 edujeeho/todo-boot:latest
+docker run -d --name todo-cd -p 8080:8080 minkyueo/todo-boot:latest
