@@ -1,7 +1,7 @@
-# Delivery 까지만 진행한다.
 name: Docker Image Delivery
 
 on:
+  # GitHub workflow에 직접 생성해서 배포하겠다.
   workflow_dispatch:
 
 jobs:
@@ -39,17 +39,17 @@ jobs:
       - name: Push latest
         run: docker push "${{ secrets.DOCKERHUB_USERNAME }}/todo-boot:latest"
 
-#      # 여기부터 AWS
-#      # AWS 로그인
-#      - name: Configure AWS Credentials
-#        uses: aws-actions/configure-aws-credentials@v1
-#        with:
-#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          aws-region: ap-northeast-2
-#      # CodeDeploy 실행
-#      - name: Create Deployment
-#        run: |
-#          aws deploy create-deployment \
-#          --cli-input-json file://./code-deploy.json \
-#          --region ap-northeast-2
+      # 여기부터 AWS
+      # AWS 로그인
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+      # CodeDeploy 실행
+      - name: Create Deployment
+        run: |
+          aws deploy create-deployment \
+          --cli-input-json file://./code-deploy.json \
+          --region ap-northeast-2

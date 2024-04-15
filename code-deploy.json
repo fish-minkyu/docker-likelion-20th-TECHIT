@@ -4,7 +4,7 @@
   "revision": {
     "revisionType": "S3",
     "s3Location": {
-      "bucket": "jeeho-github-artifacts",
+      "bucket": "minkyu-github-artifacts",
       "key": "codedeploy.zip",
       "bundleType": "zip"
     }

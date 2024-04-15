@@ -1,4 +1,4 @@
-# Docker & Docker Image workflow
+# Docker & Docker Image workflow <- 복습해서 재정리 필요
 
 ### 스팩
 
@@ -38,7 +38,7 @@
 </details>
 
 <details>
-<summary><strong>Docker을 이용한 배포</strong></summary>
+<summary><strong>Docker을 이용한 배포 (4월 2일까지 진행)</strong></summary>
 
 - `docker-image.yml`
 
@@ -85,6 +85,67 @@ jobs:
         run: docker push "${{ secrets.DOCKERHUB_USERNAME }}/todo-boot:latest"
 ```
 
+<br>
+
+- `gradle-ci.yml`
+```shell
+name: Java CI with Gradle
+
+on:
+#  push:
+#    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # 소스코드의 테스트를 진행하는 Job
+  test:
+    # 이 Job은 Ubuntu 최신 LTS에서 실행된다.
+    runs-on: ubuntu-latest
+    # 이 Job의 개별 단계
+    steps:
+      # 소스코드 가져오기
+      - name: Checkout Source
+        # 이미 만들어진 Action을 쓸 경우 uses
+        uses: actions/checkout@v4
+      # JDK 설정하기
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        # Action에 전달할 인자들
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      # Gradle 설정하기
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+      # Gradle Wrapper로 Test 진행
+      - name: Test with Gradle Wrapper
+        # 그냥 실행하는 명령의 경우 run
+        run: ./gradlew test
+  # 서로 다른 Job은 서로 다른 컴퓨터에서 실행한다고 가정하고 작성해주자.
+  boot-jar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.1.0
+      # Gradle Wrapper로 JAR 파일 생성
+      - name: Create Boot JAR with Gradle Wrapper
+        run: ./gradlew bootJar
+      # JAR 파일을 Artifact로 업로드
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        # 어떤 파일을 업로드 할건지
+        with:
+          name: artifact
+          path: build/libs/*.jar
+```
 
 </details>
 
