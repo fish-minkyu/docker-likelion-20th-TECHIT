@@ -1,7 +1,7 @@
 name: Docker Image Delivery
 
 on:
-  # GitHub workflow에 직접 생성해서 배포하겠다.
+  # GitHub workflow에 직접 생성해서 배포하겠다., GitHub -> Action -> Docker Image Delivery
   workflow_dispatch:
 
 jobs:

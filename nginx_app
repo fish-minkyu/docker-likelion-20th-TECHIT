@@ -1,0 +1,12 @@
+server {
+    listen 80;
+    server_name 3.34.199.120;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://localhost:8080;
+    }
+
+}
