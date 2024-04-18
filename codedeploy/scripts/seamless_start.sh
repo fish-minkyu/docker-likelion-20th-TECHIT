@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # 우선 새 버전을 가져온다.
-docker pull edujeeho/todo-boot:latest
+docker pull minkyueo/todo-boot:latest
 
 # 포트 설정을 진행한다.
 # 우선 다음에 실행할 포트를 나타내는 변수를 만들고
@@ -29,7 +29,7 @@ fi
 echo "$next_run" > "$HOME/last_run"
 
 # next_run 포트에 새 버전을 실행한다.
-docker run --rm -d -p "$next_run:8080" --name "todo-app-$next_run" edujeeho/todo-boot:latest
+docker run --rm -d -p "$next_run:8080" --name "todo-app-$next_run" minkyueo/todo-boot:latest
 
 # 이전 설정이 있는 경우 지운다음
 if [ $last_run -ne -1 ]; then
